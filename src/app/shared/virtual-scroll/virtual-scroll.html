@@ -15,7 +15,7 @@
   @for (item of visibleItems(); track item.id) {
     <div
       class="vs-item-wrapper"
-      [class.vs-item--focused]="focusedIndex() === item._origIndex"
+      [class.vs-item-focused]="focusedIndex() === item._origIndex"
       [attr.data-index]="item._origIndex">
       @if (itemTemplate) {
         <ng-container

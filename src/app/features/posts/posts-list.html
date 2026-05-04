@@ -26,8 +26,8 @@
 
 <ng-template #headerTpl>
   <div class="posts-header">
-    <div class="posts-header__top">
-      <span class="posts-header__count">
+    <div class="posts-header-top">
+      <span class="posts-header-count">
         <strong>{{ store.filteredPostCount() | number }}</strong>
         of {{ store.totalPostCount() | number }} posts
       </span>
@@ -42,12 +42,12 @@
       <div class="sort-toggle" role="group" aria-label="Sort posts">
         <button
           class="sort-btn"
-          [class.sort-btn--active]="store.sort() === 'recent'"
+          [class.sort-btn-active]="store.sort() === 'recent'"
           (click)="store.sort.set('recent')"
         >Recent</button>
         <button
           class="sort-btn"
-          [class.sort-btn--active]="store.sort() === 'title'"
+          [class.sort-btn-active]="store.sort() === 'title'"
           (click)="store.sort.set('title')"
         >A-Z</button>
       </div>

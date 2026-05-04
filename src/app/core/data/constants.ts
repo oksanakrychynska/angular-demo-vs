@@ -29,25 +29,36 @@ export const LAST_NAMES = [
 ];
 
 export const COMPANIES = [
-    'Acme Corp','Globex','Initech','Umbrella Ltd','Soylent Corp','Dunder Mifflin',
+    'Acme Corp','Global Inc','OKKO Group','Umbrella Ltd','Soylent Corp','Dunder Mifflin',
     'Massive Dynamic','Oceanic Airlines','Prestige Worldwide','Bluth Company',
-    'Nakatomi Corp','Cyberdyne Systems','Wayne Enterprises','Stark Industries',
-    'Oscorp','Weyland-Yutani','InGen','Tyrell Corp','Omni Consumer Products',
-    'Multi National United','Virtucon','Rekall Inc','Buy N Large','Veridian Dynamics',
+    'Kia Motors','Pan American','Wayne Enterprises','Stark Industries',
+    'Oscar','Nestle','InGen','Tyrell Corp','Omni Consumer Products',
+    'Multi National United','McDonald\'s','Barbi Inc','Buy N Large','Boston Dynamics',
 ];
 
 export const LOREM_WORDS = [
-    'lorem','ipsum','dolor','sit','amet','consectetur','adipiscing','elit','sed','do',
-    'eiusmod','tempor','incididunt','ut','labore','et','dolore','magna','aliqua','enim',
-    'ad','minim','veniam','quis','nostrud','exercitation','ullamco','laboris','nisi',
-    'aliquip','ex','ea','commodo','consequat','duis','aute','irure','in','reprehenderit',
-    'voluptate','velit','esse','cillum','fugiat','nulla','pariatur','excepteur','sint',
-    'occaecat','cupidatat','non','proident','sunt','culpa','qui','officia','deserunt',
-    'mollit','anim','id','est','laborum','curabitur','pretium','tincidunt','lacus',
-    'nunc','pulvinar','sapien','ac','feugiat','pretium','nibh','ipsum','consequat',
-    'nisl','suscipit','adipiscing','bibendum','est','ultricies','integer','quis',
-    'angular','typescript','frontend','performance','virtual','scroll','component',
-    'signal','reactive','observable','state','management','optimization','rendering',
+  'I','you','we','they','he','she','it',
+  'a','the','this','that','these','those',
+  'my','your','his','her','our','their',
+  'man','woman','child','friend','person','teacher','student',
+  'dog','cat','bird','car','house','city','room','food','water','coffee',
+  'book','phone','computer','idea','story','job','day','night','time','world',
+  'run','walk','go','come','take','make','see','look','find','give',
+  'use','try','ask','tell','work','call','leave','feel','seem','become',
+  'start','stop','open','close','play','move','live','love','like','want','need',
+  'big','small','good','bad','new','old','fast','slow','easy','hard',
+  'happy','sad','strong','weak','right','wrong','early','late','busy','free',
+  'very','really','quite','just','always','often','sometimes','never',
+  'here','there','now','then','today','yesterday','tomorrow',
+  'and','or','but','because','so','if','when','while','although',
+  'in','on','at','by','with','about','for','from','to','into','over','under',
+  'is','are','was','were','be','been','being',
+  'do','does','did','have','has','had','will','would','can','could','should',
+  'tree','jump','blue','quick','river','laugh','stone','bright','run','cloud',
+  'music','green','light','dream','soft','apple','drive','happy','field','sky',
+  'write','cold','fire','smile','wind','glass','read','fast','shadow','warm',
+  'think','water','strong','bird','open','night','gold','move','sound','clear',
+  'walk','sweet','road','fresh','star','play','dark','calm','build','wave'
 ];
 
 export const AVATAR_COLORS = [

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, inject, output, viewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, output} from '@angular/core';
 import { AppStore } from '../../core/store/app.store';
 import { DataService } from '../../core/data/data.service';
 import { Post } from '../../shared/models/models';
@@ -21,9 +21,6 @@ export class PostsList {
     private readonly data = inject(DataService);
 
     readonly postOpened = output<Post>();
-
-    readonly vs = viewChild<VirtualScrollComponent>('vs');
-
     readonly posts = computed(() => this.store.filteredPosts() as unknown as VirtualElement[]);
 
     onSearchInput(event: Event): void {

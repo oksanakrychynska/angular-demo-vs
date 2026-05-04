@@ -203,8 +203,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, AfterViewInit 
     endIdx = Math.min(items.length - 1, endIdx + OVERSCAN);
 
     const topPad = this.prefixSums[startIdx];
-    const bottomPad =
-      this.prefixSums[items.length] - this.prefixSums[endIdx + 1];
+    const bottomPad = this.prefixSums[items.length] - this.prefixSums[endIdx + 1];
 
     const visible = items.slice(startIdx, endIdx + 1).map((item, i) => ({
       ...item,
@@ -236,10 +235,5 @@ export class VirtualScrollComponent implements OnInit, OnChanges, AfterViewInit 
         }
       });
     });
-  }
-
-  scrollToTop(): void {
-    const el = this.scrollContainer()?.nativeElement;
-    if (el) el.scrollTop = 0;
   }
 }

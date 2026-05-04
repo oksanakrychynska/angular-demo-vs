@@ -5,7 +5,7 @@
   <ng-template vsItem let-user let-index="index">
     <button
       class="user-item"
-      [class.user-item--selected]="isSelected(user.id)"
+      [class.user-item-selected]="isSelected(user.id)"
       (click)="store.toggleUser(user.id)"
       [attr.aria-pressed]="isSelected(user.id)"
       [attr.aria-label]="user.name + ', ' + user.company"
@@ -28,8 +28,8 @@
 
 <ng-template #headerTpl>
   <div class="list-header">
-    <span class="list-header__title">Users</span>
-    <span class="list-header__count">
+    <span class="list-header-title">Users</span>
+    <span class="list-header_count">
           {{ store.usersSelected().size || 'All' }}
       @if (store.usersSelected().size) {
         <button class="clear-btn" (click)="store.clearUsers()" aria-label="Clear selection">✕</button>

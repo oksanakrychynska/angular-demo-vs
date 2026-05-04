@@ -17,13 +17,13 @@
   backdrop-filter: blur(8px);
 }
 
-.posts-header__top {
+.posts-header-top {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.posts-header__count {
+.posts-header-count {
   font-size: 12px;
   color: var(--color-text-dim);
   min-width: 132px;
@@ -72,12 +72,12 @@
   transition: all 0.15s;
 }
 
-.sort-btn--active {
+.sort-btn-active {
   background: var(--color-accent);
   color: #fff;
 }
 
-.sort-btn:not(.sort-btn--active):hover {
+.sort-btn:not(.sort-btn-active):hover {
   color: var(--color-text);
   background: var(--color-hover);
 }
@@ -105,7 +105,7 @@
   border-radius: 8px;
   color: var(--color-text);
   font-size: 13px;
-  font-family: var(--font-body);
+  font-family: var(--font-body) sans-serif;
   outline: none;
   transition: border-color 0.15s;
 
