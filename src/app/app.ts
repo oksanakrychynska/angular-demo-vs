@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { PostsListComponent } from './features/posts/posts-list.component';
-import { UsersListComponent } from './features/users/users-list.component';
+import { PostsList } from './features/posts/posts-list';
+import { UsersList } from './features/users/users-list';
 import { PostDialogComponent } from './features/post-dialog/post-dialog.component';
 import { Post } from './shared/models/models';
 
 @Component({
   selector: 'app-root',
-  imports: [UsersListComponent, PostsListComponent, PostDialogComponent],
+  imports: [UsersList, PostsList, PostDialogComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

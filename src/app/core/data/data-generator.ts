@@ -38,14 +38,14 @@ export function generateUsers(count: number): User[] {
     });
 }
 
-export function generatePosts(count: number, users: User[]): Post[] {
-    const rng = mulberry32(SEED * 2);
+export function generatePosts(count: number, users: User[], startId = 1, seed = SEED * 2): Post[] {
+    const rng = mulberry32(seed);
     const now = Date.now();
     return Array.from({ length: count }, (_, i) => {
         const wordCount = 4 + Math.floor(rng() * 6);
         const bodyCount = 20 + Math.floor(rng() * 60);
         return {
-            id: i + 1,
+            id: startId + i,
             userId: users[Math.floor(rng() * users.length)].id,
             title: capitalize(loremWords(rng, wordCount)),
             body: capitalize(loremWords(rng, bodyCount)) + '.',

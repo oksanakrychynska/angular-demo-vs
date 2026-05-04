@@ -13,6 +13,7 @@
     outline: none;
     will-change: transform;
     scrollbar-width: thin;
+    scrollbar-gutter: stable;
   }
   .vs-header {
     position: sticky;

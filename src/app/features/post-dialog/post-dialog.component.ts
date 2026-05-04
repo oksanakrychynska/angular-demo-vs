@@ -18,7 +18,6 @@ import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-post-dialog',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DatePipe],
     templateUrl: './post-dialog.component.html',

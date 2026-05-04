@@ -1,0 +1,64 @@
+<app-virtual-scroll
+  #vs
+  [items]="posts()"
+  [estimatedItemHeight]="116"
+  [headerTemplate]="headerTpl"
+  (itemActivated)="onItemActivated($event)"
+>
+  <ng-template vsItem let-post let-index="index">
+    <button
+      class="post-item"
+      (click)="postOpened.emit(post)"
+      [attr.aria-label]="'Open post: ' + post['title']"
+    >
+      <div class="post-user-dot" [style.background]="getUserColor(post['userId'])"></div>
+      <div class="post-content">
+        <div class="post-header">
+          <span class="post-user-name">{{ getUserName(post['userId']) }}</span>
+          <span class="post-date">{{ formatDate(post['createdAt']) }}</span>
+        </div>
+        <h3 class="post-title">{{ post['title'] }}</h3>
+        <p class="post-body">{{ post['body'] }}</p>
+      </div>
+    </button>
+  </ng-template>
+</app-virtual-scroll>
+
+<ng-template #headerTpl>
+  <div class="posts-header">
+    <div class="posts-header__top">
+          <span class="posts-header__count">
+            <strong>{{ store.filteredPostCount() | number }}</strong>
+            of {{ store.totalPostCount() | number }} posts
+          </span>
+      <div class="sort-toggle" role="group" aria-label="Sort posts">
+        <button
+          class="sort-btn"
+          [class.sort-btn--active]="store.sort() === 'recent'"
+          (click)="store.sort.set('recent')"
+        >Recent</button>
+        <button
+          class="sort-btn"
+          [class.sort-btn--active]="store.sort() === 'title'"
+          (click)="store.sort.set('title')"
+        >A–Z</button>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input
+        #searchInput
+        type="search"
+        class="search-input"
+        placeholder="Search posts…"
+        [value]="store.postSearch()"
+        (input)="onSearchInput($event)"
+        aria-label="Search posts"
+        autocomplete="off"
+      />
+      @if (store.postSearch()) {
+        <button class="search-clear" (click)="clearSearch()" aria-label="Clear search">✕</button>
+      }
+    </div>
+  </div>
+</ng-template>

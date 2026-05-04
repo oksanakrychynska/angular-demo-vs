@@ -1,0 +1,39 @@
+<app-virtual-scroll
+  [items]="users()"
+  [estimatedItemHeight]="57"
+  [headerTemplate]="headerTpl">
+  <ng-template vsItem let-user let-index="index">
+    <button
+      class="user-item"
+      [class.user-item--selected]="isSelected(user.id)"
+      (click)="store.toggleUser(user.id)"
+      [attr.aria-pressed]="isSelected(user.id)"
+      [attr.aria-label]="user.name + ', ' + user.company"
+    >
+          <span
+            class="user-avatar"
+            [style.background]="user.avatar"
+            aria-hidden="true"
+          >{{ initials(user.name) }}</span>
+      <span class="user-info">
+            <span class="user-name">{{ user.name }}</span>
+            <span class="user-meta">{{ user.username }} · {{ user.company }}</span>
+          </span>
+      @if (isSelected(user.id)) {
+        <span class="user-check" aria-hidden="true">✓</span>
+      }
+    </button>
+  </ng-template>
+</app-virtual-scroll>
+
+<ng-template #headerTpl>
+  <div class="list-header">
+    <span class="list-header__title">Users</span>
+    <span class="list-header__count">
+          {{ store.usersSelected().size || 'All' }}
+      @if (store.usersSelected().size) {
+        <button class="clear-btn" (click)="store.clearUsers()" aria-label="Clear selection">✕</button>
+      }
+        </span>
+  </div>
+</ng-template>

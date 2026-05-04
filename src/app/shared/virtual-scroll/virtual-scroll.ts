@@ -12,7 +12,6 @@ import {VirtualElement} from '../models/virtualElement';
 
 @Directive({
   selector: '[vsItem]',
-  standalone: true
 })
 export class VsItemDirective {
   constructor(public templateRef: TemplateRef<{ $implicit: unknown; index: number }>) {}
@@ -45,7 +44,6 @@ const DEFAULT_ITEM_HEIGHT = 80;
 
 @Component({
   selector: 'app-virtual-scroll',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgTemplateOutlet],
   templateUrl: './virtual-scroll.html',
@@ -55,6 +53,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, AfterViewInit 
   readonly items = input.required<VirtualElement[]>();
   readonly estimatedItemHeight = input<number>(DEFAULT_ITEM_HEIGHT);
   readonly headerTemplate = input<TemplateRef<unknown> | null>(null);
+  readonly observeItemHeights = input(false);
 
   readonly itemActivated = output<{ item: VirtualElement; index: number }>();
 
@@ -113,24 +112,25 @@ export class VirtualScrollComponent implements OnInit, OnChanges, AfterViewInit 
     });
     this.resizeObserver.observe(el);
 
-    // Observe rendered items for variable heights
-    this.itemResizeObserver = new ResizeObserver(entries => {
-      let changed = false;
-      for (const entry of entries) {
-        const el = entry.target as HTMLElement;
-        const idx = parseInt(el.dataset['index'] ?? '-1', 10);
-        if (idx < 0) continue;
-        const newH = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
-        if (this.heights[idx] !== newH) {
-          this.heights[idx] = newH;
-          changed = true;
+    if (this.observeItemHeights()) {
+      this.itemResizeObserver = new ResizeObserver(entries => {
+        let changed = false;
+        for (const entry of entries) {
+          const el = entry.target as HTMLElement;
+          const idx = parseInt(el.dataset['index'] ?? '-1', 10);
+          if (idx < 0) continue;
+          const newH = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
+          if (this.heights[idx] !== newH) {
+            this.heights[idx] = newH;
+            changed = true;
+          }
         }
-      }
-      if (changed) {
-        this.prefixSums = buildPrefixSums(this.heights);
-        this.updateVisibleRange();
-      }
-    });
+        if (changed) {
+          this.prefixSums = buildPrefixSums(this.heights);
+          this.updateVisibleRange();
+        }
+      });
+    }
 
     this.updateVisibleRange();
 

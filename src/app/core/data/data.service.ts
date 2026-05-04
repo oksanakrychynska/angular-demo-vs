@@ -29,9 +29,11 @@ export class DataService {
             { type: 'module' }
         );
 
-        worker.onmessage = ({ data }: MessageEvent<{ users: User[]; posts: Post[] }>) => {
+        worker.onmessage = ({ data }: MessageEvent<{ users: User[]; posts: Post[]; done?: boolean }>) => {
             this.setData(data.users, data.posts);
-            worker.terminate();
+            if (data.done) {
+                worker.terminate();
+            }
         };
 
         worker.onerror = () => {
