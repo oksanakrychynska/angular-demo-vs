@@ -1,0 +1,46 @@
+<dialog
+  #dialogEl
+  class="post-dialog"
+  (click)="onBackdropClick($event)"
+  (keydown.escape)="closed.emit()"
+  aria-modal="true">
+  @if (post()) {
+    <div class="dialog-inner">
+      <header class="dialog-header">
+        <div class="dialog-user-row">
+              <span class="dialog-avatar" [style.background]="authorColor()">
+                {{ authorInitials() }}
+              </span>
+          <div class="dialog-user-info">
+            <span class="dialog-author">{{ authorName() }}</span>
+            <span class="dialog-date">{{ post()!.createdAt | date:'mediumDate' }}</span>
+          </div>
+        </div>
+        <button
+          class="dialog-close"
+          (click)="closed.emit()"
+          aria-label="Close dialog"
+        >✕
+        </button>
+      </header>
+
+      <div class="dialog-body">
+        <h2 class="dialog-title">{{ post()!.title }}</h2>
+        <p class="dialog-post-body">{{ post()!.body }}</p>
+      </div>
+
+      <div class="dialog-comments">
+        <div class="comments-header">
+          <span class="comments-label">Comments</span>
+          <span class="comments-count">{{ comments().length }}</span>
+        </div>
+        @for (comment of comments(); track comment.id) {
+          <div class="comment">
+            <span class="comment-author">{{ comment.author }}</span>
+            <p class="comment-body">{{ comment.body }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</dialog>
