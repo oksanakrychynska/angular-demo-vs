@@ -11,7 +11,7 @@ import { Post } from './shared/models/models';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('scrolling-demo-app');
+  protected readonly title = signal('demo-app');
   protected readonly selectedPost = signal<Post | null>(null);
 
   protected openPost(post: Post): void {

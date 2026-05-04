@@ -1,20 +1,25 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {computed, effect, inject, Injectable, signal} from '@angular/core';
 import {toObservable} from '@angular/core/rxjs-interop';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {debounceTime, distinctUntilChanged, skip} from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {DataService} from '../data/data.service';
 import {SortOrder} from '../../shared/models/models';
+
+type Theme = 'dark' | 'light';
 
 @Injectable({providedIn: 'root'})
 export class AppStore {
   private readonly data = inject(DataService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly document = inject(DOCUMENT);
 
   readonly usersSelected = signal<Set<number>>(new Set<number>());
   readonly postSearch = signal('');
   readonly sort = signal<SortOrder>('recent');
+  readonly theme = signal<Theme>(this.loadTheme());
 
   readonly filteredPosts = computed(() => {
     const sel = this.usersSelected();
@@ -44,6 +49,8 @@ export class AppStore {
   readonly loading = computed(() => this.data.loading());
 
   constructor() {
+    effect(() => this.applyTheme(this.theme()));
+
     this.route.queryParams.pipe(takeUntilDestroyed()).subscribe(params => {
       const userIds = (params['users'] ?? '')
         .split(',')
@@ -82,6 +89,10 @@ export class AppStore {
     this.usersSelected.set(new Set<number>());
   }
 
+  toggleTheme(): void {
+    this.theme.update(theme => theme === 'dark' ? 'light' : 'dark');
+  }
+
   private syncUrl(): void {
     const sel = this.usersSelected();
     const search = this.postSearch();
@@ -98,5 +109,22 @@ export class AppStore {
       queryParamsHandling: 'merge',
       replaceUrl: true,
     });
+  }
+
+  private loadTheme(): Theme {
+    const stored = this.storage()?.getItem('theme');
+    return stored === 'light' ? 'light' : 'dark';
+  }
+
+  private applyTheme(theme: Theme): void {
+    this.document.documentElement.dataset['theme'] = theme;
+    this.storage()?.setItem('theme', theme);
+  }
+
+  private storage(): Storage | null {
+    const storage = globalThis.localStorage;
+    return typeof storage?.getItem === 'function' && typeof storage?.setItem === 'function'
+      ? storage
+      : null;
   }
 }

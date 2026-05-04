@@ -103,7 +103,6 @@ export class VirtualScrollComponent implements OnInit, OnChanges, AfterViewInit 
       return;
     }
 
-    // Observe container resize
     this.resizeObserver = new ResizeObserver(entries => {
       for (const entry of entries) {
         this.containerHeight = entry.contentRect.height;
@@ -200,7 +199,6 @@ export class VirtualScrollComponent implements OnInit, OnChanges, AfterViewInit 
     let startIdx = binarySearch(this.prefixSums, scrollTop);
     let endIdx = binarySearch(this.prefixSums, viewEnd);
 
-    // Apply overscan
     startIdx = Math.max(0, startIdx - OVERSCAN);
     endIdx = Math.min(items.length - 1, endIdx + OVERSCAN);
 

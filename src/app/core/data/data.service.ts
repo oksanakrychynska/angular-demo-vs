@@ -5,12 +5,10 @@ import { generateComments, generatePosts, generateUsers, mulberry32 } from './da
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-    // Signals so consumers react when data arrives
     readonly users   = signal<User[]>([]);
     readonly posts   = signal<Post[]>([]);
     readonly loading = signal(true);
 
-    // Fast lookup map, populated once data arrives
     private userMap = new Map<number, User>();
 
     constructor() {
@@ -19,7 +17,6 @@ export class DataService {
 
     private loadInWorker(): void {
         if (typeof Worker === 'undefined') {
-            // SSR / no-worker fallback — run synchronously
             this.loadSynchronously();
             return;
         }
@@ -41,7 +38,7 @@ export class DataService {
             this.loadSynchronously();
         };
 
-        worker.postMessage(null); // kick off generation
+        worker.postMessage(null);
     }
 
     private loadSynchronously(): void {
