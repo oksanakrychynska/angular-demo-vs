@@ -9,7 +9,9 @@
   grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
   height: 100%;
   min-height: 0;
-  background: var(--color-bg);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 42%, transparent), transparent 180px),
+    var(--color-bg);
 }
 
 .app-sidebar,
@@ -22,10 +24,11 @@
 .app-sidebar {
   border-right: 1px solid var(--color-border);
   background: var(--color-surface);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
 }
 
 .app-content {
-  background: var(--color-bg);
+  background: color-mix(in srgb, var(--color-bg) 94%, var(--color-surface));
 }
 
 @media (max-width: 760px) {

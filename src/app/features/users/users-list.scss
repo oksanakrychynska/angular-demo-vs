@@ -13,9 +13,9 @@
   padding: 0 16px;
   height: 48px;
   min-height: 48px;
-  background: var(--color-surface);
+  background: color-mix(in srgb, var(--color-surface) 96%, var(--color-bg));
   border-bottom: 1px solid var(--color-border);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .list-header-title {
@@ -39,13 +39,13 @@
 }
 
 .clear-btn {
-  background: none;
-  border: none;
+  background: color-mix(in srgb, var(--color-bg) 85%, var(--color-surface));
+  border: 1px solid var(--color-border);
   cursor: pointer;
   color: var(--color-text-dim);
   font-size: 11px;
-  padding: 2px 4px;
-  border-radius: 4px;
+  padding: 2px 7px;
+  border-radius: 999px;
   transition: color 0.15s, background 0.15s;
 
   &:hover {
@@ -67,17 +67,18 @@
   cursor: pointer;
   text-align: left;
   border-bottom: 1px solid var(--color-border-subtle);
-  transition: background 0.12s;
+  transition: background 0.12s, box-shadow 0.12s;
   color: var(--color-text);
 
   &:hover {
-    background: var(--color-hover);
+    background: color-mix(in srgb, var(--color-hover) 70%, var(--color-surface));
   }
 }
 
 .user-item-selected {
   background: var(--color-selected);
-  border-left: 3px solid var(--color-accent);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+  border-left: 0;
   padding-left: 13px;
 }
 
@@ -85,6 +86,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,8 +123,18 @@
 }
 
 .user-check {
-  color: var(--color-accent);
-  font-size: 14px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #26A69A;
+  border-radius: 2px;
+  background: #26A69A;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
   font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(46, 125, 50, 0.35);
   flex-shrink: 0;
 }
